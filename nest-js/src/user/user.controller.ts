@@ -31,8 +31,8 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-  /*@Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
-  }*/
+  @Delete('DeleteUser/:id')
+  remove(@Param('id') id: number) {
+    return this.userService.remove(id);
+  }
 }
