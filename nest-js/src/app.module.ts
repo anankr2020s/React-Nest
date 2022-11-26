@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 import { DataSource } from 'typeorm';
+import { BookModule } from './book/book.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -18,6 +19,7 @@ import { DataSource } from 'typeorm';
       synchronize: true,
     }),
     UserModule,
+    BookModule,
   ],
   controllers: [AppController],
   providers: [AppService],

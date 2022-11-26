@@ -1,37 +1,25 @@
 import { React, useState } from "react";
-import {Button,  Form, Input } from "antd";
+import {Button,  Form, Input, Result } from "antd";
 import axios, {isCancel, AxiosError} from 'axios';
 
 const InsertForm = () => {
-
-  const [DataInsert, SetDataInsert] = useState({
-    username : "",
-    email : "",
-    password : ""
-  });
-
-  function handleChangeForm(event) {
-    const { name, value } = event.target;
-    SetDataInsert((userData) => {
-      return {
-        ...userData,
-        [name]: value,
-      };
-    });
-  }
-  console.log(DataInsert)
+  const [username,SetUsername] = useState('');
+  const [email,SetEmail] = useState('');
+  const [password,SetPassword] = useState('');
 
   const ApiUrl = 'http://localhost:5000/user/CreateUser'
-  function CreateUser(DataInsert){
-    axios({
-        method: 'post',
-        url: ApiUrl,
-        data : {
-            username: DataInsert.username,
-            email: DataInsert.email,
-            password: DataInsert.password
-        }
-    })
+    async function CreateUser(DataInsert) {
+    console.log('Submit Do')
+        const response = await axios({
+            method: 'post',
+            url: ApiUrl,
+            data : {
+                username: username,
+                email: email,
+                password: password,
+            }
+        })
+        console.log(response.data)
   }
   return (
     <Form
@@ -40,6 +28,7 @@ const InsertForm = () => {
       wrappCol={{ span: 16 }}
       initialValues={{ remember: true }}
       autoComplete="off"
+      
     >
         <Form.Item
             label='Username'
@@ -52,7 +41,8 @@ const InsertForm = () => {
 
             ]}
         >
-            <Input name={'username'} value={'username'} onChange={handleChangeForm}/>
+            <Input name={'username'} value={'username'} 
+                onChange={(e)=> SetUsername(e.target.value)}/>
         </Form.Item>
         <Form.Item
             label='Email'
@@ -67,7 +57,8 @@ const InsertForm = () => {
 
             ]}
         >
-            <Input name={'email'} value={'email'} onChange={handleChangeForm}/>
+            <Input name={'email'} value={'email'} 
+                onChange={(e)=> SetEmail(e.target.value)}/>
         </Form.Item>
         <Form.Item
             label='Password'
@@ -80,7 +71,8 @@ const InsertForm = () => {
 
             ]}
         >
-            <Input.Password name={'password'} value={'password'} onChange={handleChangeForm}/>
+            <Input.Password name={'password'} value={'password'} 
+                onChange={(e)=> SetPassword(e.target.value)}/>
         </Form.Item>
         <Form.Item
             wrapperCol={{

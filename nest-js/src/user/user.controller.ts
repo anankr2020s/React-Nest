@@ -17,6 +17,7 @@ export class UserController {
 
   @Post('CreateUser')
   create(@Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto);
     return this.userService.create(createUserDto);
   }
 
@@ -29,4 +30,9 @@ export class UserController {
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
+
+  /*@Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.userService.remove(+id);
+  }*/
 }

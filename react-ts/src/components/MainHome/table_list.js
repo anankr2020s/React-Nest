@@ -19,6 +19,10 @@ const TableList = () => {
      console.log("err: ",error)
     })
    }
+
+  function DeleteUser(userid){
+    axios.delete()
+  }
   return (
     <div>
       <Table dataSource={data}>
